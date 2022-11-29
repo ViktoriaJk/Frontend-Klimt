@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
+import PictureCard from "./components/material/PictureCard";
+import CircularStatic from "./components/Progress";
+import ButtonAppBar from "./components/material/AppBar";
 
 function App() {
   const [objectId, setObjectId] = useState([]);
-
+  const [paintings, setpaintings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getData = async () => {
     const response = await fetch(
@@ -20,16 +24,23 @@ function App() {
     setObjectId(data.objectIDs);
   };
 
-  const test = async () => {
+  const getPaintings = async () => {
+    setIsLoading(true);
+    const klimtPaintings = [];
     for (let i = 0; i < objectId.length; i++) {
-      const response = await fetch(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId[i]}`
-      );
-      const data = await response.json();
-      if (data.primaryImage !== "") {
-        console.log(data);
+      if (objectId[i] != 655303 && objectId[i] != 644042) {
+        const response = await fetch(
+          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId[i]}`
+        );
+        const data = await response.json();
+        if (data.primaryImage !== "") {
+          klimtPaintings.push(data);
+          console.log(data);
+        }
       }
     }
+    setpaintings(klimtPaintings);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -37,10 +48,24 @@ function App() {
   }, []);
 
   useEffect(() => {
-    test();
+    getPaintings();
   }, [objectId]);
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <header>
+        <div>
+          <ButtonAppBar />
+        </div>
+      </header>
+
+      <main>
+        <div className="picturesContainer">
+          {isLoading ? <CircularStatic size={500} /> : paintings.map(painting => <PictureCard title={painting.title} type={painting.classification} date={painting.objectDate} picture={painting.primaryImageSmall} />)}
+        </div>
+      </main>
+    </div>
+  )
 }
 
 export default App;
