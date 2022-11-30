@@ -5,8 +5,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import InputField from './InputField';
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({getSearchData}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -23,6 +24,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
+          <InputField getSearchData={getSearchData} />
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

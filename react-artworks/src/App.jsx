@@ -9,6 +9,13 @@ function App() {
   const [objectId, setObjectId] = useState([]);
   const [paintings, setPaintings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchPainter,setSearchPainter] = useState("")
+
+
+  const getSearchData = (e) =>{
+    setSearchPainter(e.target.value)
+    console.log(searchPainter)
+  }
 
   const getData = async () => {
     const response = await fetch(
@@ -51,23 +58,35 @@ function App() {
     getPaintings();
   }, [objectId]);
 
+  const filteredPainters = paintings ? paintings
+  .filter(painting => painting.artistDisplayName.includes(searchPainter)) : []
+  
   return (
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar />
+          <ButtonAppBar getSearchData={getSearchData} />
         </div>
       </header>
 
       <main>
         <div className="picturesContainer">
-          {isLoading ? <CircularStatic size={500} /> : paintings.map(painting => (
-          <PictureCard
-          name={painting.artistDisplayName}
-          title={painting.title}
-          type={painting.classification}
-          date={painting.objectDate}
-          picture={painting.primaryImageSmall} />))}
+          {isLoading && <CircularStatic size={500} />}
+          {paintings &&(
+            <>
+            {filteredPainters.length ? filteredPainters
+                        .map(painting => (
+                          <PictureCard
+                          name={painting.artistDisplayName}
+                          title={painting.title}
+                          type={painting.classification}
+                          date={painting.objectDate}
+                          picture={painting.primaryImageSmall} />
+                        )) : <p>Nothing found</p> }    
+            </>            
+          ) }
+      
+
         </div>
       </main>
     </div>

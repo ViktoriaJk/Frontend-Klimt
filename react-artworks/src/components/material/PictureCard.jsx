@@ -35,7 +35,10 @@ const ExpandMore = styled((props) => {
     };
   
     return (
-      <Card sx={{ width: 400, bgcolor: '#eee' }}>
+      <Card 
+      sx={{ width: 400, bgcolor: '#eee' }}
+      onClick={e =>{ console.log(e)}}
+      >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -56,6 +59,7 @@ const ExpandMore = styled((props) => {
           image={picture}
           title={title}
           alt=""
+          
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
