@@ -7,12 +7,12 @@ import ButtonAppBar from "./components/material/AppBar";
 
 function App() {
   const [objectId, setObjectId] = useState([]);
-  const [paintings, setpaintings] = useState([]);
+  const [paintings, setPaintings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getData = async () => {
     const response = await fetch(
-      "https://collectionapi.metmuseum.org/public/collection/v1/search?q=GustavKlimt"
+      "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&medium=Paintings&q=ClaudeMonet"
     );
     const data = await response.json();
     console.log(data);
@@ -39,7 +39,7 @@ function App() {
         }
       }
     }
-    setpaintings(klimtPaintings);
+    setPaintings(klimtPaintings);
     setIsLoading(false);
   };
 
@@ -61,7 +61,13 @@ function App() {
 
       <main>
         <div className="picturesContainer">
-          {isLoading ? <CircularStatic size={500} /> : paintings.map(painting => <PictureCard title={painting.title} type={painting.classification} date={painting.objectDate} picture={painting.primaryImageSmall} />)}
+          {isLoading ? <CircularStatic size={500} /> : paintings.map(painting => (
+          <PictureCard
+          name={painting.artistDisplayName}
+          title={painting.title}
+          type={painting.classification}
+          date={painting.objectDate}
+          picture={painting.primaryImageSmall} />))}
         </div>
       </main>
     </div>

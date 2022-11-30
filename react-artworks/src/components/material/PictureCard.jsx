@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
   
-  const PictureCard = ({ title, type, date, picture }) => {
+  const PictureCard = ({ name, title, type, date, picture }) => {
 
     const [expanded, setExpanded] = useState(false);
   
@@ -47,14 +47,14 @@ const ExpandMore = styled((props) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Gustav Klimt"
+          title={name}
           subheader={type + ', ' + date}
         />
         <CardMedia
           component="img"
           style={{width: 'auto', maxWidth: 400, height: '100%', margin: '0 auto', maxHeight: 300, objectFit: 'fill'}}
           image={picture}
-          title="Gustav Klimt"
+          title={title}
           alt=""
         />
         <CardContent>
@@ -64,7 +64,7 @@ const ExpandMore = styled((props) => {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteIcon sx={{ color: red[500]}}/>
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
