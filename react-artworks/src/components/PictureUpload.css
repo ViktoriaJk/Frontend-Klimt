@@ -1,0 +1,36 @@
+
+.uploadContainerDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 5rem;
+    align-items: center;
+    border: 1px dotted red;
+}
+.leftDiv h1{
+    color: #4d4d4d;
+}
+.uploadDivForm{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;       
+}
+.uploadDivForm input{
+    height: 3rem;
+    width: 14rem;
+    padding: 1rem;
+    border: 0.5px solid #c0bfbf;
+    border-radius: 0.4rem;
+}
+.uploadDivForm button{
+    height:  2.8rem;
+    width: 7rem;
+    align-self: flex-end;
+    background-color: #4986D4;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    
+}

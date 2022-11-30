@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
   
-  const PictureCard = ({ name, title, type, date, picture }) => {
+  const PictureCard = ({ name, title, type, date, picture,firstLetter }) => {
 
     const [expanded, setExpanded] = useState(false);
   
@@ -42,7 +42,7 @@ const ExpandMore = styled((props) => {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
+              {firstLetter}
             </Avatar>
           }
           action={

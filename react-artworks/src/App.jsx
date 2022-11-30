@@ -4,15 +4,24 @@ import { useEffect } from "react";
 import PictureCard from "./components/material/PictureCard";
 import CircularStatic from "./components/Progress";
 import ButtonAppBar from "./components/material/AppBar";
+import Login from "./components/Login";
 
 function App() {
   const [objectId, setObjectId] = useState([]);
   const [paintings, setPaintings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchPainter,setSearchPainter] = useState("")
+  const [isLoggedIn,setIsLoggedIn]=useState(false)
+  const [firstLetter,setFirstLetter]=useState("")
   const [searchTag, setSearchTag] = useState ("")
-  const [newPaintName,setNewPaint]= useState()
 
+  const toLogIn = (firstLetter) =>{
+    setFirstLetter(firstLetter)
+    setIsLoggedIn(true)
+  }
+  const toLogOut = () =>{
+    setIsLoggedIn(false)
+  }
 
   const getSearchPainters = (e) =>{
     const lowerCased = e.target.value.toLowerCase()
@@ -72,7 +81,7 @@ function App() {
 
   useEffect(() => {
     getPaintings();
-  }, [objectId]);
+  }, [isLoggedIn]);
   
 
 const filteredPainters = paintings ? paintings
@@ -91,15 +100,16 @@ const filteredPainters = paintings ? paintings
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar getSearchPainters={getSearchPainters}  getTags={getTags}/>
+          <ButtonAppBar isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters}  getTags={getTags}/>
           
         </div>
       </header>
 
       <main>
         <div className="picturesContainer">
+          {!isLoggedIn && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
           {isLoading && <CircularStatic size={500} />}
-          {paintings && !isLoading &&(
+          {paintings && !isLoading && isLoggedIn &&(
             <>
             {filteredPainters.length ? filteredPainters
                         .map(painting => (
@@ -108,7 +118,8 @@ const filteredPainters = paintings ? paintings
                           title={painting.title}
                           type={painting.classification}
                           date={painting.objectDate}
-                          picture={painting.primaryImageSmall} />
+                          picture={painting.primaryImageSmall}
+                          firstLetter={firstLetter}  />
                         )) : <p>Nothing found</p> }    
             </>            
           ) }
