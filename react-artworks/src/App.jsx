@@ -11,6 +11,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchPainter,setSearchPainter] = useState("")
   const [searchTag, setSearchTag] = useState ("")
+  const [newPaintName,setNewPaint]= useState()
 
 
   const getSearchPainters = (e) =>{
@@ -24,6 +25,8 @@ function App() {
     setSearchTag(lowerCased)
     console.log(searchPainter)
   }
+
+
 
 
 
