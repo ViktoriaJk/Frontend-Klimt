@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function InputField({getSearchData}) {
+export default function InputField({getSearchPainters}) {
   return (
     <Box
       component="form"
@@ -12,7 +12,7 @@ export default function InputField({getSearchData}) {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" placeholder='search Painter' label="Outlined" variant="outlined" onChange={e=>getSearchData(e)} />
+      <TextField id="outlined-basic" placeholder='search Painter' label="Painters" variant="outlined" onChange={e=>getSearchPainters(e)} />
     </Box>
   );
 }

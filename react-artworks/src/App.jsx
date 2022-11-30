@@ -10,12 +10,22 @@ function App() {
   const [paintings, setPaintings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchPainter,setSearchPainter] = useState("")
+  const [searchTag, setSearchTag] = useState ("")
 
 
-  const getSearchData = (e) =>{
-    setSearchPainter(e.target.value)
+  const getSearchPainters = (e) =>{
+    const lowerCased = e.target.value.toLowerCase()
+    setSearchPainter(lowerCased)
+    console.log(lowerCased)
+  }
+
+  const getTags = (e) =>{
+    const lowerCased = e.target.value.toLowerCase()
+    setSearchTag(lowerCased)
     console.log(searchPainter)
   }
+
+
 
   const getData = async () => {
     const response = await fetch(
@@ -30,6 +40,8 @@ function App() {
     const data = await getData();
     setObjectId(data.objectIDs);
   };
+
+
 
   const getPaintings = async () => {
     setIsLoading(true);
@@ -48,6 +60,7 @@ function App() {
     }
     setPaintings(klimtPaintings);
     setIsLoading(false);
+    
   };
 
   useEffect(() => {
@@ -57,22 +70,33 @@ function App() {
   useEffect(() => {
     getPaintings();
   }, [objectId]);
+  
 
-  const filteredPainters = paintings ? paintings
-  .filter(painting => painting.artistDisplayName.includes(searchPainter)) : []
+const filteredPainters = paintings ? paintings
+  .filter(painting => painting.artistDisplayName.toLowerCase().includes(searchPainter)) : []
+
+  
+//  const filteredTags = paintings ? paintings.filter(painting => {
+//     for (const elem of painting.tags){
+//       return (elem.term.toLowerCase().includes(searchTag))
+//     }
+//   }) : []
+
+  
   
   return (
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar getSearchData={getSearchData} />
+          <ButtonAppBar getSearchPainters={getSearchPainters}  getTags={getTags}/>
+          
         </div>
       </header>
 
       <main>
         <div className="picturesContainer">
           {isLoading && <CircularStatic size={500} />}
-          {paintings &&(
+          {paintings && !isLoading &&(
             <>
             {filteredPainters.length ? filteredPainters
                         .map(painting => (
