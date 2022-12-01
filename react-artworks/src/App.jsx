@@ -10,26 +10,26 @@ function App() {
   const [objectId, setObjectId] = useState([]);
   const [paintings, setPaintings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchPainter,setSearchPainter] = useState("")
-  const [isLoggedIn,setIsLoggedIn]=useState(false)
-  const [firstLetter,setFirstLetter]=useState("")
-  const [searchTag, setSearchTag] = useState ("")
+  const [searchPainter, setSearchPainter] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [firstLetter, setFirstLetter] = useState("")
+  const [searchTag, setSearchTag] = useState("")
 
-  const toLogIn = (firstLetter) =>{
+  const toLogIn = (firstLetter) => {
     setFirstLetter(firstLetter)
     setIsLoggedIn(true)
   }
-  const toLogOut = () =>{
+  const toLogOut = () => {
     setIsLoggedIn(false)
   }
 
-  const getSearchPainters = (e) =>{
+  const getSearchPainters = (e) => {
     const lowerCased = e.target.value.toLowerCase()
     setSearchPainter(lowerCased)
     console.log(lowerCased)
   }
 
-  const getTags = (e) =>{
+  const getTags = (e) => {
     const lowerCased = e.target.value.toLowerCase()
     setSearchTag(lowerCased)
     console.log(searchPainter)
@@ -72,7 +72,7 @@ function App() {
     }
     setPaintings(klimtPaintings);
     setIsLoading(false);
-    
+
   };
 
   useEffect(() => {
@@ -82,26 +82,26 @@ function App() {
   useEffect(() => {
     getPaintings();
   }, [isLoggedIn]);
-  
 
-const filteredPainters = paintings ? paintings
-  .filter(painting => painting.artistDisplayName.toLowerCase().includes(searchPainter)) : []
 
-  
-//  const filteredTags = paintings ? paintings.filter(painting => {
-//     for (const elem of painting.tags){
-//       return (elem.term.toLowerCase().includes(searchTag))
-//     }
-//   }) : []
+  const filteredPainters = paintings ? paintings
+    .filter(painting => painting.artistDisplayName.toLowerCase().includes(searchPainter)) : []
 
-  
-  
+
+  //  const filteredTags = paintings ? paintings.filter(painting => {
+  //     for (const elem of painting.tags){
+  //       return (elem.term.toLowerCase().includes(searchTag))
+  //     }
+  //   }) : []
+
+
+
   return (
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters}  getTags={getTags}/>
-          
+          <ButtonAppBar isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
+
         </div>
       </header>
 
@@ -109,21 +109,21 @@ const filteredPainters = paintings ? paintings
         <div className="picturesContainer">
           {!isLoggedIn && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
           {isLoading && <CircularStatic size={500} />}
-          {paintings && !isLoading && isLoggedIn &&(
+          {paintings && !isLoading && isLoggedIn && (
             <>
-            {filteredPainters.length ? filteredPainters
-                        .map(painting => (
-                          <PictureCard
-                          name={painting.artistDisplayName}
-                          title={painting.title}
-                          type={painting.classification}
-                          date={painting.objectDate}
-                          picture={painting.primaryImageSmall}
-                          firstLetter={firstLetter}  />
-                        )) : <p>Nothing found</p> }    
-            </>            
-          ) }
-      
+              {filteredPainters.length ? filteredPainters
+                .map(painting => (
+                  <PictureCard
+                    name={painting.artistDisplayName}
+                    title={painting.title}
+                    type={painting.classification}
+                    date={painting.objectDate}
+                    picture={painting.primaryImageSmall}
+                    firstLetter={firstLetter} />
+                )) : <p>Nothing found</p>}
+            </>
+          )}
+
 
         </div>
       </main>

@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import PictureUpload from '../PictureUpload';
+import UploadIcon from '@mui/icons-material/Upload';
 
 export default function TemporaryDrawer({newPaint}) {
   const [state, setState] = React.useState({
@@ -36,7 +37,8 @@ export default function TemporaryDrawer({newPaint}) {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button style={{color:"black"}} onClick={toggleDrawer(anchor, true)}>UPLOAD</Button>
+          <Button variant="outlined" sx={{color:"inherit"}} startIcon={<UploadIcon />} onClick={toggleDrawer(anchor, true)}>UPLOAD
+          </Button>
           <Drawer
             anchor={"left"}
             open={state[anchor]}

@@ -2,17 +2,17 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function InputField({getSearchPainters}) {
+export default function InputField({ getSearchPainters }) {
   return (
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="outlined-basic" placeholder='search Painter' label="Painters" variant="outlined" onChange={e=>getSearchPainters(e)} />
-    </Box>
+    <div>
+      <Box
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+      >
+        <TextField id="outlined-size-small" label="Search Painter" variant="outlined" size="small" onChange={e => getSearchPainters(e)}
+        />
+      </Box >
+    </div>
   );
 }

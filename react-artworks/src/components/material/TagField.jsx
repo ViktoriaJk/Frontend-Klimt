@@ -5,14 +5,13 @@ import TextField from '@mui/material/TextField';
 export default function TagField({getTags}) {
   return (
     <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
+    sx={{
+      '& .MuiTextField-root': { m: 1, width: '25ch' },
+    }}
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" placeholder='search TAGS' label="Tags" variant="outlined" onChange={e=>getTags(e)} />
+      <TextField id="outlined-size-small"  label="Search by tags" size="small" variant="outlined" onChange={e=>getTags(e)} />
     </Box>
   );
 }

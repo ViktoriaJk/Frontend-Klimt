@@ -11,7 +11,7 @@ import TemporaryDrawer from './InputDrawer';
 
 export default function ButtonAppBar({getSearchPainters, getTags,newPaint,isLoggedIn,toLogOut,isLoading}) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -24,7 +24,6 @@ export default function ButtonAppBar({getSearchPainters, getTags,newPaint,isLogg
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
           </Typography>
           {isLoggedIn && !isLoading && <TemporaryDrawer newPaint={newPaint}></TemporaryDrawer>}
           {isLoggedIn && !isLoading && <TagField getTags={getTags}></TagField>}

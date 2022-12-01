@@ -3,7 +3,7 @@ import "./PictureUpload.css"
 const PictureUpload = () => {
   return (
     <div className="uploadContainerDiv">
-      <h1>Please Upload a new Picture:</h1>
+      <h1>Please upload a new picture:</h1>
       <form className="uploadDivForm">
         <input
           type="text"
