@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
   
-  const PictureCard = ({ name, title, type, date, picture,firstLetter }) => {
+  const PictureCard = ({tags, name, title, type, date, picture,firstLetter }) => {
 
     const [expanded, setExpanded] = useState(false);
   
@@ -37,7 +37,7 @@ const ExpandMore = styled((props) => {
     return (
       <Card 
       sx={{ width: 400, bgcolor: '#eee' }}
-      onClick={e =>{ console.log(e)}}
+      onClick={e =>{ console.log()}}
       >
         <CardHeader
           avatar={
@@ -51,7 +51,7 @@ const ExpandMore = styled((props) => {
             </IconButton>
           }
           title={name}
-          subheader={type + ', ' + date}
+          subheader={type + ', ' + date+" "}
         />
         <CardMedia
           component="img"

@@ -5,6 +5,7 @@ import PictureCard from "./components/material/PictureCard";
 import CircularStatic from "./components/Progress";
 import ButtonAppBar from "./components/material/AppBar";
 import Login from "./components/Login";
+import Favorites from "./components/Favorites";
 
 function App() {
   const [objectId, setObjectId] = useState([]);
@@ -14,6 +15,16 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [firstLetter, setFirstLetter] = useState("")
   const [searchTag, setSearchTag] = useState("")
+  const [watchFavourite,setWatchFavourite] = useState(false)
+  const [watchPaintings,setWatchPaintings] = useState(false)
+
+  const dontWatchFavourite = () =>{
+    setWatchFavourite(false)
+  }
+
+  const toWatchFavourite = () =>{
+    setWatchFavourite(true)
+  }
 
   const toLogIn = (firstLetter) => {
     setFirstLetter(firstLetter)
@@ -26,13 +37,13 @@ function App() {
   const getSearchPainters = (e) => {
     const lowerCased = e.target.value.toLowerCase()
     setSearchPainter(lowerCased)
-    console.log(lowerCased)
+    // console.log(lowerCased)
   }
 
   const getTags = (e) => {
     const lowerCased = e.target.value.toLowerCase()
     setSearchTag(lowerCased)
-    console.log(searchPainter)
+    // console.log(searchPainter)
   }
 
 
@@ -44,7 +55,7 @@ function App() {
       "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&medium=Paintings&q=ClaudeMonet"
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data;
   };
 
@@ -85,14 +96,17 @@ function App() {
 
 
   const filteredPainters = paintings ? paintings
-    .filter(painting => painting.artistDisplayName.toLowerCase().includes(searchPainter)) : []
+    .filter(painting => painting.artistDisplayName.toLowerCase().includes(searchPainter))
+    .filter(painting => {
+      let contain =false
+      for (const elem of painting.tags){
+        console.log(elem.term);
+        contain=(elem.term.toLowerCase().includes(searchTag))
+      }
+      return contain
+    })
+    : []
 
-
-  //  const filteredTags = paintings ? paintings.filter(painting => {
-  //     for (const elem of painting.tags){
-  //       return (elem.term.toLowerCase().includes(searchTag))
-  //     }
-  //   }) : []
 
 
 
@@ -100,7 +114,7 @@ function App() {
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
+          <ButtonAppBar watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
 
         </div>
       </header>
@@ -109,7 +123,8 @@ function App() {
         <div className="picturesContainer">
           {!isLoggedIn && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
           {isLoading && <CircularStatic size={500} />}
-          {paintings && !isLoading && isLoggedIn && (
+          {watchFavourite && <Favorites></Favorites>}
+          {paintings && !isLoading && isLoggedIn && !watchFavourite && (
             <>
               {filteredPainters.length ? filteredPainters
                 .map(painting => (
@@ -119,6 +134,7 @@ function App() {
                     type={painting.classification}
                     date={painting.objectDate}
                     picture={painting.primaryImageSmall}
+                    tags={painting.tags}
                     firstLetter={firstLetter} />
                 )) : <p>Nothing found</p>}
             </>
