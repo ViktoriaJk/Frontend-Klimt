@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./Login.css";
+import "./SignIn.css";
 
 
 
 
 
-const Login = ({toLogIn,getPaintings}) => {
+const SignIn = ({toSignIn}) => {
     const [loginName,setLoginName]= useState("")
     const [loginPassword,setLoginPassword]=useState("") 
 
@@ -15,16 +15,16 @@ const Login = ({toLogIn,getPaintings}) => {
             name: loginName,
             password: loginPassword
         }
-     console.log(loginData)
-     toLogIn(loginName[0].toUpperCase())
+
+        toSignIn()
     }
   return (
-    <div className="loginContainerDiv">
-        <div className="loginDiv">
+    <div className="signInContainerDiv">
+        <div className="signInDiv">
             <div className="leftDiv">
-                <h1>Please Login:</h1>
+                <h1>Please Sign In:</h1>
                 <form className="leftDivForm" onSubmit={sendData}>
-                    <input type="text" placeholder="Login Name" value={loginName} onChange={(e) => setLoginName(e.target.value)} />
+                    <input type="text" placeholder="Sign In Name" value={loginName} onChange={(e) => setLoginName(e.target.value)} />
                     <input type="password" placeholder="Password" value={loginPassword} onChange={(e) =>setLoginPassword(e.target.value)}/>
                     <button>Submit</button>
                 </form>
@@ -35,4 +35,4 @@ const Login = ({toLogIn,getPaintings}) => {
   );
 };
 
-export default Login;
+export default SignIn;

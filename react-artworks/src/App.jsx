@@ -5,18 +5,32 @@ import PictureCard from "./components/material/PictureCard";
 import CircularStatic from "./components/Progress";
 import ButtonAppBar from "./components/material/AppBar";
 import Login from "./components/Login";
+import SignIn from "./components/SignIn";
 import Favorites from "./components/Favorites";
 
 function App() {
   const [objectId, setObjectId] = useState([]);
   const [paintings, setPaintings] = useState([]);
+  const[favoritePaintings,setFavoritePaintings] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [searchPainter, setSearchPainter] = useState("")
+  const [tryLoading,setTryLoading]=useState(false)
+  const [trySigningUp,setTrySigningUp]=useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [firstLetter, setFirstLetter] = useState("")
   const [searchTag, setSearchTag] = useState("")
   const [watchFavourite,setWatchFavourite] = useState(false)
-  const [watchPaintings,setWatchPaintings] = useState(false)
+
+
+  const changeLoading = () =>{
+    setTrySigningUp(false)
+    setTryLoading(true)
+  }
+  const changeSignIn = () =>{
+    setTrySigningUp(true)
+    setTryLoading(false)
+  }
+
 
   const dontWatchFavourite = () =>{
     setWatchFavourite(false)
@@ -26,9 +40,14 @@ function App() {
     setWatchFavourite(true)
   }
 
+  const toSignIn = () =>{
+    setIsLoggedIn(true)
+    setTrySigningUp(false)
+  }
   const toLogIn = (firstLetter) => {
     setFirstLetter(firstLetter)
     setIsLoggedIn(true)
+    setTryLoading(false)
   }
   const toLogOut = () => {
     setIsLoggedIn(false)
@@ -60,6 +79,7 @@ function App() {
   };
 
   const init = async () => {
+ 
     const data = await getData();
     setObjectId(data.objectIDs);
   };
@@ -67,7 +87,7 @@ function App() {
 
 
   const getPaintings = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
     const klimtPaintings = [];
     for (let i = 0; i < objectId.length; i++) {
       if (objectId[i] != 655303 && objectId[i] != 644042) {
@@ -85,14 +105,15 @@ function App() {
     setIsLoading(false);
 
   };
+  useEffect(() => {
+    getPaintings();
+    
+  }, [objectId]);
 
   useEffect(() => {
     init();
   }, []);
 
-  useEffect(() => {
-    getPaintings();
-  }, [isLoggedIn]);
 
 
   const filteredPainters = paintings ? paintings
@@ -101,7 +122,9 @@ function App() {
       let contain =false
       for (const elem of painting.tags){
         console.log(elem.term);
-        contain=(elem.term.toLowerCase().includes(searchTag))
+        if(elem.term.toLowerCase().includes(searchTag)){
+          contain=(elem.term.toLowerCase().includes(searchTag))
+        }
       }
       return contain
     })
@@ -114,17 +137,18 @@ function App() {
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
+          <ButtonAppBar changeSignIn={changeSignIn} trySigningUp={trySigningUp}  tryLoading={tryLoading} changeLoading={changeLoading} watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
 
         </div>
       </header>
 
       <main>
         <div className="picturesContainer">
-          {!isLoggedIn && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
+          {tryLoading && !trySigningUp && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
+          {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
           {isLoading && <CircularStatic size={500} />}
-          {watchFavourite && <Favorites></Favorites>}
-          {paintings && !isLoading && isLoggedIn && !watchFavourite && (
+          {watchFavourite &&  <Favorites favoritePaintings={favoritePaintings}></Favorites>}
+          {!isLoading && paintings && !tryLoading && !trySigningUp && !watchFavourite &&  
             <>
               {filteredPainters.length ? filteredPainters
                 .map(painting => (
@@ -135,10 +159,11 @@ function App() {
                     date={painting.objectDate}
                     picture={painting.primaryImageSmall}
                     tags={painting.tags}
-                    firstLetter={firstLetter} />
+                    firstLetter={firstLetter}
+                    isLoggedIn={isLoggedIn} />
                 )) : <p>Nothing found</p>}
             </>
-          )}
+          }
 
 
         </div>

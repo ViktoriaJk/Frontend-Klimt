@@ -13,6 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { useState } from "react";
 
 const ExpandMore = styled((props) => {
@@ -26,7 +28,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
   
-  const PictureCard = ({tags, name, title, type, date, picture,firstLetter }) => {
+  const PictureCard = ({tags, name, title, type, date, picture,firstLetter,isLoggedIn }) => {
 
     const [expanded, setExpanded] = useState(false);
   
@@ -40,14 +42,14 @@ const ExpandMore = styled((props) => {
       onClick={e =>{ console.log()}}
       >
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {firstLetter}
+         avatar={
+           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+             {firstLetter}
             </Avatar>
           }
           action={
             <IconButton aria-label="settings">
-              <MoreVertIcon />
+              <RemoveRedEyeIcon></RemoveRedEyeIcon>
             </IconButton>
           }
           title={name}
@@ -67,11 +69,8 @@ const ExpandMore = styled((props) => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon sx={{ color: red[500]}}/>
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
+           <IconButton aria-label="add to favorites">
+           {isLoggedIn ? <FavoriteIcon sx={{ color: red[500]}}/> : <HeartBrokenIcon ></HeartBrokenIcon>}
           </IconButton>
           <ExpandMore
             expand={expanded}

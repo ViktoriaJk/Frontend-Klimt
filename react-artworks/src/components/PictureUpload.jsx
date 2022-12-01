@@ -43,6 +43,12 @@ const PictureUpload = () => {
 
         <button>Submit</button>
       </form>
+      {newFile && <div className="uploadChoosenDiv">
+        <h2>Choosen Photo:</h2>
+        <img src={URL.createObjectURL(newFile)} alt="" />
+        <h3>Title:{newTitle}</h3>
+        <p>{newDesc}</p>
+      </div>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-.loginContainerDiv{
+.signInContainerDiv{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -10,7 +10,7 @@
     
 }
 
-.loginDiv{
+.signInDiv{
     display: flex;
     width: 50%;
 }
@@ -22,7 +22,7 @@
     align-items: center;
     background-color: white;
     border-radius: 1rem 0 0 1rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 .leftDiv h1{
     color: #4d4d4d;
@@ -55,10 +55,10 @@
 .rightDiv{
     height: 30rem;
     width: 50%;
-    background-image: url("../assets/women-in-the-garden.jpg");
+    background-image: url("../assets/1000_F_235089049_1vbv6tn8pWC3y2nmKIywIR6W7S3oBqP2.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0 1rem 1rem 0;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
