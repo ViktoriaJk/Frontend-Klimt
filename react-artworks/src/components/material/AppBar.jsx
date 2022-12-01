@@ -12,7 +12,7 @@ import TemporaryDrawer from './InputDrawer';
 export default function ButtonAppBar({ changeSignIn,trySigningUp,tryLoading,changeLoading,watchFavourite,dontWatchFavourite,getSearchPainters, getTags,newPaint,isLoggedIn,toLogOut,isLoading,toWatchFavourite}) {
   return (
     <Box sx={{ flexGrow: 1, }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
         {isLoggedIn && !isLoading && <TemporaryDrawer edge="start" newPaint={newPaint}></TemporaryDrawer>}
         {isLoggedIn && !watchFavourite &&<Button onClick={ toWatchFavourite } color="inherit">FAVOURITES</Button>}

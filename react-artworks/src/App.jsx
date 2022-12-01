@@ -138,7 +138,6 @@ function App() {
       <header>
         <div>
           <ButtonAppBar changeSignIn={changeSignIn} trySigningUp={trySigningUp}  tryLoading={tryLoading} changeLoading={changeLoading} watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
-
         </div>
       </header>
 

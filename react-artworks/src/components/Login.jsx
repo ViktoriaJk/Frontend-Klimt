@@ -1,10 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
 
-
-
-
-
 const Login = ({toLogIn,getPaintings}) => {
     const [loginName,setLoginName]= useState("")
     const [loginPassword,setLoginPassword]=useState("") 
