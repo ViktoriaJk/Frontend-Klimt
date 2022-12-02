@@ -2,11 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
 import PictureCard from "./components/material/PictureCard";
-import CircularStatic from "./components/Progress";
 import ButtonAppBar from "./components/material/AppBar";
 import Login from "./components/Login";
 import SignIn from "./components/SignIn";
 import Favorites from "./components/Favorites";
+import LoadingAnimation from "./components/loadingAnimation";
 
 function App() {
   const [objectId, setObjectId] = useState([]);
@@ -145,7 +145,7 @@ function App() {
         <div className="picturesContainer">
           {tryLoading && !trySigningUp && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
           {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
-          {isLoading && <CircularStatic size={500} />}
+          {isLoading && <LoadingAnimation/>}
           {watchFavourite &&  <Favorites favoritePaintings={favoritePaintings}></Favorites>}
           {!isLoading && paintings && !tryLoading && !trySigningUp && !watchFavourite &&  
             <>
