@@ -11,7 +11,7 @@ import LoadingAnimation from "./components/loadingAnimation";
 function App() {
   const [objectId, setObjectId] = useState([]);
   const [paintings, setPaintings] = useState([]);
-  const[favoritePaintings,setFavoritePaintings] = useState([])
+  const [favoritePaintings,setFavoritePaintings] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [searchPainter, setSearchPainter] = useState("")
   const [tryLoading,setTryLoading]=useState(false)

@@ -55,14 +55,15 @@ const ExpandMore = styled((props) => {
           title={name}
           subheader={type + ', ' + date+" "}
         />
+        <div style={{height: 310}}>
         <CardMedia
           component="img"
           style={{width: 'auto', maxWidth: 400, height: '100%', margin: '0 auto', maxHeight: 300, objectFit: 'fill'}}
           image={picture}
           title={title}
           alt=""
-          
         />
+        </div>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
           {title}
