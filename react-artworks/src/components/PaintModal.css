@@ -1,0 +1,8 @@
+.modalContainerDiv{
+    display: flex;
+    justify-content: row;
+    gap: 2rem;
+}
+.modalleftDiv img{
+    width: 32rem;
+}

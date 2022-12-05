@@ -1,13 +1,13 @@
 import "./Login.css";
 import LoginInput from "./material/LoginInput";
 
-const Login = ({toLogIn,getPaintings}) => {
+const Login = ({toLogIn,setUserId}) => {
     
     return (
         <div className="signInContainerDiv">
             <div className="signInDiv">
                 <div className="leftDiv">
-                <LoginInput toLogIn={toLogIn} />
+                <LoginInput setUserId={setUserId} toLogIn={toLogIn} />
                 </div>
                 <div className="rightDiv"></div>
                 </div>

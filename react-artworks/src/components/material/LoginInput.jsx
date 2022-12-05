@@ -30,11 +30,10 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LoginInput({toLogIn}) {
+export default function LoginInput({toLogIn,setUserId}) {
 
   const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
-  const [ userId, setUserId ] = useState(null);
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -56,7 +55,7 @@ export default function LoginInput({toLogIn}) {
 
   const login = async () => {
     try {
-      const response = await http.post("http://3.67.12.21:8080/api/login", { email, password })
+      const response = await http.post("/api/login", { email, password })
       return response.data.sessionId
     } catch (error) {
       alert("Unsuccessed login")

@@ -11,7 +11,6 @@ import LoadingAnimation from "./components/loadingAnimation";
 function App() {
   const [objectId, setObjectId] = useState([]);
   const [paintings, setPaintings] = useState([]);
-  const [favoritePaintings,setFavoritePaintings] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [searchPainter, setSearchPainter] = useState("")
   const [tryLoading,setTryLoading]=useState(false)
@@ -20,6 +19,7 @@ function App() {
   const [firstLetter, setFirstLetter] = useState("")
   const [searchTag, setSearchTag] = useState("")
   const [watchFavourite,setWatchFavourite] = useState(false)
+  const [ userId, setUserId ] = useState(null);
 
 
   const changeLoading = () =>{
@@ -143,10 +143,10 @@ function App() {
 
       <main>
         <div className="picturesContainer">
-          {tryLoading && !trySigningUp && <Login toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
+          {tryLoading && !trySigningUp && <Login setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
           {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
           {isLoading && <LoadingAnimation/>}
-          {watchFavourite &&  <Favorites favoritePaintings={favoritePaintings}></Favorites>}
+          {watchFavourite &&  <Favorites userId={userId} ></Favorites>}
           {!isLoading && paintings && !tryLoading && !trySigningUp && !watchFavourite &&  
             <>
               {filteredPainters.length ? filteredPainters
