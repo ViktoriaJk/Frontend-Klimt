@@ -18,11 +18,11 @@ const Login = ({toLogIn,getPaintings}) => {
     <div className="loginContainerDiv">
         <div className="loginDiv">
             <div className="leftDiv">
-                <h1>Please Login:</h1>
+                <h1>Log in to your account:</h1>
                 <form className="leftDivForm" onSubmit={sendData}>
                     <input type="text" placeholder="Login Name" value={loginName} onChange={(e) => setLoginName(e.target.value)} />
                     <input type="password" placeholder="Password" value={loginPassword} onChange={(e) =>setLoginPassword(e.target.value)}/>
-                    <button>Submit</button>
+                    <button>Log in</button>
                 </form>
             </div>
             <div className="rightDiv"></div>
