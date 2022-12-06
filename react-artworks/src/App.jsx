@@ -159,6 +159,8 @@ function App() {
                     picture={painting.primaryImageSmall}
                     tags={painting.tags}
                     firstLetter={firstLetter}
+                    repo = {painting.repository}
+                    wiki ={painting.artistWikidata_URL}
                     isLoggedIn={isLoggedIn} />
                 )) : <p>Nothing found</p>}
             </>

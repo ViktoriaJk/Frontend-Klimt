@@ -2,7 +2,23 @@
     display: flex;
     justify-content: row;
     gap: 2rem;
+    position: relative;
 }
 .modalleftDiv img{
     width: 32rem;
+}
+.modalrightDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modalrightDiv h2{
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+#close{
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
 }

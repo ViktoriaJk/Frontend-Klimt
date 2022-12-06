@@ -51,7 +51,10 @@ export default function SignInInput() {
   };
 
   const signup = async () => {
-    const response = await http.post("http://18.194.143.121/api/signup", { email, password })
+    const response = await http.post("http://18.194.143.121:80/api/signup", {
+    "email" : email,
+    "password" : password
+     })
     console.log(response)
   }
 
