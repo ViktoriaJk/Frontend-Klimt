@@ -50,6 +50,8 @@ function App() {
   }
   const toLogOut = () => {
     setIsLoggedIn(false)
+    setWatchFavourite(false)
+    setPage("")
   }
 
   const getSearchPainters = (e) => {
@@ -126,7 +128,7 @@ function App() {
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar userId={userId} setPage={setPage} changeSignIn={changeSignIn} trySigningUp={trySigningUp}  tryLoading={tryLoading} changeLoading={changeLoading} watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
+          <ButtonAppBar page={page} userId={userId} setPage={setPage} changeSignIn={changeSignIn} trySigningUp={trySigningUp}  tryLoading={tryLoading} changeLoading={changeLoading} watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
         </div>
       </header>
 

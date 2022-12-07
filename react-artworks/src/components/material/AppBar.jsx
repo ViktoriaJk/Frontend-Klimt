@@ -9,7 +9,7 @@ import InputField from './InputField';
 import TagField from './TagField';
 import TemporaryDrawer from './InputDrawer';
 
-export default function ButtonAppBar({setPage, userId, changeSignIn, trySigningUp, tryLoading, changeLoading, watchFavourite, dontWatchFavourite, getSearchPainters, getTags,newPaint, isLoggedIn, toLogOut, isLoading, toWatchFavourite}) {
+export default function ButtonAppBar({page,setPage, userId, changeSignIn, trySigningUp, tryLoading, changeLoading, watchFavourite, dontWatchFavourite, getSearchPainters, getTags,newPaint, isLoggedIn, toLogOut, isLoading, toWatchFavourite}) {
 
   return (
     <Box sx={{ flexGrow: 1, }}>
@@ -18,6 +18,8 @@ export default function ButtonAppBar({setPage, userId, changeSignIn, trySigningU
         {isLoggedIn && !isLoading && <TemporaryDrawer userId={userId} edge="start" newPaint={newPaint}></TemporaryDrawer>}
         {isLoggedIn && !watchFavourite &&<Button onClick={ toWatchFavourite } color="inherit">FAVOURITES</Button>}
         {isLoggedIn && watchFavourite && <Button onClick={ dontWatchFavourite } color="inherit">PAINTINGS</Button>}
+        {page==="login"  &&<Button onClick={ e=> setPage("")} color="inherit">HOME</Button>}
+        {page==="signIn" &&<Button onClick={ e=> setPage("")} color="inherit">HOME</Button>}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>
           {!isLoading && isLoggedIn &&<TagField getTags={getTags}></TagField>}
