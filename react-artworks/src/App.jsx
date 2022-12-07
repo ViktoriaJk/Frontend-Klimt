@@ -21,7 +21,6 @@ function App() {
   const [watchFavourite,setWatchFavourite] = useState(false)
   const [ userId, setUserId ] = useState(null);
 
-
   const changeLoading = () =>{
     setTrySigningUp(false)
     setTryLoading(true)
@@ -30,7 +29,6 @@ function App() {
     setTrySigningUp(true)
     setTryLoading(false)
   }
-
 
   const dontWatchFavourite = () =>{
     setWatchFavourite(false)
@@ -65,10 +63,6 @@ function App() {
     // console.log(searchPainter)
   }
 
-
-
-
-
   const getData = async () => {
     const response = await fetch(
       "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&medium=Paintings&q=ClaudeMonet"
@@ -83,8 +77,6 @@ function App() {
     const data = await getData();
     setObjectId(data.objectIDs);
   };
-
-
 
   const getPaintings = async () => {
     setIsLoading(true)
@@ -114,8 +106,6 @@ function App() {
     init();
   }, []);
 
-
-
   const filteredPainters = paintings ? paintings
     .filter(painting => painting.artistDisplayName.toLowerCase().includes(searchPainter))
     .filter(painting => {
@@ -130,9 +120,6 @@ function App() {
     })
     : []
 
-
-
-
   return (
     <div className="App">
       <header>
@@ -142,6 +129,9 @@ function App() {
       </header>
 
       <main>
+        {tryLoading && !trySigningUp && <Login setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
+        {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
+        {isLoading && <LoadingAnimation/>}
         <div className="picturesContainer">
           {tryLoading && !trySigningUp && <Login setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
           {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
@@ -166,8 +156,6 @@ function App() {
                 )) : <p>Nothing found</p>}
             </>
           }
-
-
         </div>
       </main>
     </div>
