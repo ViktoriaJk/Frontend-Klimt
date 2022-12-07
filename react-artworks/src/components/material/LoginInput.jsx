@@ -49,14 +49,15 @@ export default function LoginInput({toLogIn,setUserId}) {
     event.preventDefault();
     const userId = await login();
     setUserId(userId);
-    toLogIn(true);
-    
   };
 
   const login = async () => {
     try {
       const response = await http.post("/api/login", { email, password })
-      return response.data.sessionId
+      if(response.data.x ==="200"){
+        toLogIn(true);
+        return response.data.sessionId
+      }
     } catch (error) {
       alert("Unsuccessed login")
       //toLogIn(true);

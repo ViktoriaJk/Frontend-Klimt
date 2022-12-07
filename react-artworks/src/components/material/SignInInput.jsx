@@ -30,7 +30,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInInput() {
+export default function SignInInput({toSignIn}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +55,9 @@ export default function SignInInput() {
     "email" : email,
     "password" : password
      })
-    console.log(response)
+     if(response ==="200"){
+      toSignIn()
+    }
   }
 
   return (

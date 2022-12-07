@@ -161,6 +161,7 @@ function App() {
                     firstLetter={firstLetter}
                     repo = {painting.repository}
                     wiki ={painting.artistWikidata_URL}
+                    userId={userId}
                     isLoggedIn={isLoggedIn} />
                 )) : <p>Nothing found</p>}
             </>

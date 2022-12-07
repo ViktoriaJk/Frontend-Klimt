@@ -43,7 +43,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
   
-  const PictureCard = ({repo,wiki,tags, name, title, type, date, picture,firstLetter,isLoggedIn }) => {
+  const PictureCard = ({userId,repo,wiki,tags, name, title, type, date, picture,firstLetter,isLoggedIn }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [open, setOpen] = useState(false);
@@ -88,12 +88,14 @@ const ExpandMore = styled((props) => {
           function uploadImageToImgur(blob) {
             var formData = new FormData();
             formData.append('image', blob);
-            formData.append ('id',Math.random())
+            formData.append('title',title)
+            formData.append('description',type)
+            formData.append('tags',tags)
           
             return fetch('', {
               method: 'POST',
               headers: {
-                Accept: 'application/json',
+                Authorization: 'Bearer'+userId ,
               },
               body: formData
             })

@@ -9,7 +9,7 @@ const Favorites = ({userId}) =>{
 
     const loadPaintings = async (userId) => {
         const response = await http.get("http://localhost:3000/api/post", {
-          headers: { "authorization": userId }
+          headers: { "Authorization": 'Bearer'+userId }
         })
         setFavoritePaintings(response)
       }
