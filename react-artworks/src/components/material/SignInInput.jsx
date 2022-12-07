@@ -45,17 +45,23 @@ export default function SignInInput({setPage,toSignIn}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signup();
-    setPage("login")
+    
   };
 
   const signup = async () => {
-    const response = await http.post("http://18.194.143.121:80/api/signup", {
-    "email" : email,
-    "password" : password
-     })
-     if(response.status ===200){
-      console.log(response.status)
-      toSignIn()
+    try{
+      const response = await http.post("http://18.194.143.121:80/api/signup", {
+      "email" : email,
+      "password" : password
+       })
+       if(response.status ===200){
+        console.log(response.status)
+        toSignIn()
+        setPage("login")
+      }
+    }catch (error) {
+      alert("Unsuccessed signup")
+      //toLogIn(true);
     }
   }
 

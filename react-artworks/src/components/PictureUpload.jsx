@@ -9,14 +9,15 @@ const PictureUpload = ({userId}) => {
 
   const uploadArtwork = async (e) => {
     e.preventDefault();
+    const auth = 'Bearer '+userId;
     const formData = new FormData();
     formData.append("title", newTitle);
     formData.append("description", newDesc);
     formData.append("imgfile", newFile);
-    console.log(userId);
+    console.log(auth);
 
-    const respone = await fetch("http://18.194.143.121:80/api/artwork", {
-      method: 'POST',
+    const response = await fetch("http://18.194.143.121:80/api/artwork", {
+      method:'POST',
       headers: {
 
         "Authorization": 'Bearer' + userId,

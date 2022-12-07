@@ -52,6 +52,7 @@ function App() {
     setIsLoggedIn(false)
     setWatchFavourite(false)
     setPage("")
+    alert("you logged out")
   }
 
   const getSearchPainters = (e) => {

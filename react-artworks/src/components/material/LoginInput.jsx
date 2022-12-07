@@ -46,7 +46,7 @@ export default function LoginInput({setPage,toLogIn,setUserId}) {
     event.preventDefault();
     const userId = await login();
     setUserId(userId);
-    setPage("")
+    
   };
 
   const login = async () => {
@@ -55,6 +55,7 @@ export default function LoginInput({setPage,toLogIn,setUserId}) {
       console.log(response)
       if(response.status =="200"){
         toLogIn(true);
+        setPage("")
         console.log(response.data.accessToken)
         return response.data.accessToken
       }
