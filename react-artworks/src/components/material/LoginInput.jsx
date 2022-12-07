@@ -18,10 +18,7 @@ import http from "axios"
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+      {'Klimt Art Magazine '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -55,7 +52,7 @@ export default function LoginInput({toLogIn,setUserId}) {
 
   const login = async () => {
     try {
-      const response = await http.post("/api/login", { email, password })
+      const response = await http.post("http://18.194.143.121:80/api/login", { email, password })
       return response.data.sessionId
     } catch (error) {
       alert("Unsuccessed login")
@@ -114,18 +111,6 @@ export default function LoginInput({toLogIn,setUserId}) {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

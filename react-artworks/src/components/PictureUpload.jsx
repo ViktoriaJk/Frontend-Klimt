@@ -15,7 +15,7 @@ const PictureUpload = () => {
     data.append("description",newDesc)
     data.append("file",newFile)
 
-    fetch('/api', { method: 'POST', body: data })
+    fetch('http://18.194.143.121:80/api/artwork', { method: 'POST', body: data })
       .then(res => res.json())
   }
 
