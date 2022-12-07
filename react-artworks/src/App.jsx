@@ -131,10 +131,7 @@ function App() {
       <main>
         {tryLoading && !trySigningUp && <Login setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
         {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
-        {isLoading && <LoadingAnimation/>}
         <div className="picturesContainer">
-          {tryLoading && !trySigningUp && <Login setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
-          {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
           {isLoading && <LoadingAnimation/>}
           {watchFavourite &&  <Favorites userId={userId} ></Favorites>}
           {!isLoading && paintings && !tryLoading && !trySigningUp && !watchFavourite &&  
