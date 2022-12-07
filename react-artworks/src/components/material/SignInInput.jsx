@@ -27,7 +27,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInInput({toSignIn}) {
+export default function SignInInput({setPage,toSignIn}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,6 +45,7 @@ export default function SignInInput({toSignIn}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signup();
+    setPage("login")
   };
 
   const signup = async () => {
@@ -52,7 +53,8 @@ export default function SignInInput({toSignIn}) {
     "email" : email,
     "password" : password
      })
-     if(response ==="200"){
+     if(response.status ===200){
+      console.log(response.status)
       toSignIn()
     }
   }
@@ -73,7 +75,7 @@ export default function SignInInput({toSignIn}) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -106,7 +108,7 @@ export default function SignInInput({toSignIn}) {
               variant="contained"
               sx={{ mt: 3, mb: 2, width: 1000 }}
             >
-              Sign In
+              Sign Up
             </Button>
           </Box>
         </Box>

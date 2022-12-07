@@ -60,7 +60,7 @@ const ExpandMore = styled((props) => {
       setExpanded(!expanded);
     };
     
-        // KEP LETOLTESI FUNKCIO KEZDETE:
+/*         // KEP LETOLTESI FUNKCIO KEZDETE:
         const pictureUpload = () =>{
           var processStatus = function (response) {// process status
             if (response.status === 200 || response.status === 0) {
@@ -86,16 +86,23 @@ const ExpandMore = styled((props) => {
           };
           
           function uploadImageToImgur(blob) {
-            var formData = new FormData();
-            formData.append('image', blob);
-            formData.append('title',title)
-            formData.append('description',type)
-            formData.append('tags',tags)
-          
-            return fetch('', {
+            let formData = new FormData();
+            let auth = "Bearer"+userId;
+            console.log(auth)
+            formData.append({'file': blob});
+            formData.append({'title':title})
+            formData.append({'description':type})
+            formData.append({'tags':"proba"})
+        
+            for (const key of formData.entries()) {
+              console.log(key);
+            }
+
+            return fetch('http://18.194.143.121:80/api/artwork', {
               method: 'POST',
               headers: {
-                Authorization: 'Bearer'+userId ,
+                "Authorization": 'Bearer '+userId,
+                "Content-type": "multipart/form-data",
               },
               body: formData
             })
@@ -117,7 +124,7 @@ const ExpandMore = styled((props) => {
               console.error("vmi hiba van a feltoltesnel "+error);
             });
           }
-          // KEPFELTOLTESI FUNKCIOK VEGE  
+          // KEPFELTOLTESI FUNKCIOK VEGE   */
   
     return (
       <Card 
@@ -154,7 +161,7 @@ const ExpandMore = styled((props) => {
         </CardContent>
         <CardActions disableSpacing>
            <IconButton aria-label="add to favorites">
-           {isLoggedIn ? <FavoriteIcon sx={{ color: red[500]}}/> : <HeartBrokenIcon ></HeartBrokenIcon>}
+           {isLoggedIn ? <FavoriteIcon  sx={{ color: red[500]}}/> : <HeartBrokenIcon ></HeartBrokenIcon>}
           </IconButton>
           <ExpandMore
             expand={expanded}

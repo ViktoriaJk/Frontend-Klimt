@@ -27,7 +27,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LoginInput({toLogIn,setUserId}) {
+export default function LoginInput({setPage,toLogIn,setUserId}) {
 
   const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -46,14 +46,17 @@ export default function LoginInput({toLogIn,setUserId}) {
     event.preventDefault();
     const userId = await login();
     setUserId(userId);
+    setPage("")
   };
 
   const login = async () => {
     try {
-      const response = await http.post("/api/login", { email, password })
-      if(response.data.x ==="200"){
+      const response = await http.post("http://18.194.143.121:80/api/login", { email, password })
+      console.log(response)
+      if(response.status =="200"){
         toLogIn(true);
-        return response.data.sessionId
+        console.log(response.data.accessToken)
+        return response.data.accessToken
       }
     } catch (error) {
       alert("Unsuccessed login")
@@ -110,7 +113,7 @@ export default function LoginInput({toLogIn,setUserId}) {
               variant="contained"
               sx={{ mt: 3, mb: 2, width: 1000 }}
             >
-              Sign In
+              Log in
             </Button>
           </Box>
         </Box>

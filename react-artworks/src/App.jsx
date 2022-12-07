@@ -20,6 +20,7 @@ function App() {
   const [searchTag, setSearchTag] = useState("")
   const [watchFavourite,setWatchFavourite] = useState(false)
   const [ userId, setUserId ] = useState(null);
+  const [page,setPage] = useState("")
 
   const changeLoading = () =>{
     setTrySigningUp(false)
@@ -39,7 +40,7 @@ function App() {
   }
 
   const toSignIn = () =>{
-    setIsLoggedIn(true)
+    setTryLoading(true)
     setTrySigningUp(false)
   }
   const toLogIn = (firstLetter) => {
@@ -120,21 +121,23 @@ function App() {
     })
     : []
 
+
+    console.log(page)
   return (
     <div className="App">
       <header>
         <div>
-          <ButtonAppBar changeSignIn={changeSignIn} trySigningUp={trySigningUp}  tryLoading={tryLoading} changeLoading={changeLoading} watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
+          <ButtonAppBar setPage={setPage} changeSignIn={changeSignIn} trySigningUp={trySigningUp}  tryLoading={tryLoading} changeLoading={changeLoading} watchFavourite ={watchFavourite} dontWatchFavourite={dontWatchFavourite} toWatchFavourite={toWatchFavourite} isLoading={isLoading} isLoggedIn={isLoggedIn} toLogOut={toLogOut} getSearchPainters={getSearchPainters} getTags={getTags} />
         </div>
       </header>
 
       <main>
-        {tryLoading && !trySigningUp && <Login setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
-        {trySigningUp && !tryLoading && <SignIn toSignIn={toSignIn}></SignIn>}
+        { page==="login" &&<Login setPage={setPage} setUserId={setUserId} toLogIn={toLogIn} getPaintings={getPaintings}></Login>}
+        { page==="signIn" && <SignIn toSignIn={toSignIn} setPage={setPage}></SignIn>}
         <div className="picturesContainer">
           {isLoading && <LoadingAnimation/>}
           {watchFavourite &&  <Favorites userId={userId} ></Favorites>}
-          {!isLoading && paintings && !tryLoading && !trySigningUp && !watchFavourite &&  
+          {!isLoading && paintings && page==="" && !watchFavourite &&  
             <>
               {filteredPainters.length ? filteredPainters
                 .map(painting => (

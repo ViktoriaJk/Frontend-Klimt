@@ -9,7 +9,7 @@ import InputField from './InputField';
 import TagField from './TagField';
 import TemporaryDrawer from './InputDrawer';
 
-export default function ButtonAppBar({ changeSignIn,trySigningUp,tryLoading,changeLoading,watchFavourite,dontWatchFavourite,getSearchPainters, getTags,newPaint,isLoggedIn,toLogOut,isLoading,toWatchFavourite}) {
+export default function ButtonAppBar({setPage, changeSignIn,trySigningUp,tryLoading,changeLoading,watchFavourite,dontWatchFavourite,getSearchPainters, getTags,newPaint,isLoggedIn,toLogOut,isLoading,toWatchFavourite}) {
   return (
     <Box sx={{ flexGrow: 1, }}>
       <AppBar position="fixed">
@@ -21,9 +21,9 @@ export default function ButtonAppBar({ changeSignIn,trySigningUp,tryLoading,chan
           </Typography>
           {!isLoading && isLoggedIn &&<TagField getTags={getTags}></TagField>}
           {!isLoading && !tryLoading && !trySigningUp && <InputField getSearchPainters={getSearchPainters} />}
-          {!tryLoading && !isLoggedIn && <Button color="inherit" onClick={changeLoading}>LOG IN</Button>}
+          {!tryLoading && !isLoggedIn && <Button color="inherit" onClick={e => setPage("login")}>LOG IN</Button>}
           {isLoggedIn &&  <Button color="inherit" onClick={toLogOut} >LOG OUT</Button>}
-          {!isLoggedIn && <Button color="inherit" onClick={changeSignIn}>Sign In</Button>}
+          {!isLoggedIn && <Button color="inherit" onClick={e => setPage("signIn")}>Sign Up</Button>}
         </Toolbar>
       </AppBar>
     </Box>
