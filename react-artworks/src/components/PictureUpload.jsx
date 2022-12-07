@@ -7,27 +7,30 @@ const PictureUpload = ({userId}) => {
   const [newDesc, setNewDesc] = useState("")
   const [newFile, setNewFile] = useState(null)
 
-  const uploadArtwork = async () => {
+  const uploadArtwork = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("title", newTitle);
     formData.append("description", newDesc);
-    formData.append("file", newFile);
+    formData.append("imgfile", newFile);
+    console.log(userId);
 
     const respone = await fetch("http://18.194.143.121:80/api/artwork", {
       method: 'POST',
       headers: {
 
-        "Authorization": 'Bearer ' + userId,
+        "Authorization": 'Bearer' + userId,
         "Content-type": "multipart/form-data",
       },
       body: formData
     })
+    console.log(response);
   }
 
   return (
     <div className="uploadContainerDiv">
       <h1>Please upload a new picture:</h1>
-      <form className="uploadDivForm" onSubmit={sendData}>
+      <form className="uploadDivForm">
         <input
           type="text"
           placeholder="Picture title"
