@@ -59,6 +59,10 @@ const ExpandMore = styled((props) => {
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
+
+    const uploadArtwork = async() => {
+
+    }
     
 /*         // KEP LETOLTESI FUNKCIO KEZDETE:
         const pictureUpload = () =>{
@@ -89,10 +93,10 @@ const ExpandMore = styled((props) => {
             let formData = new FormData();
             let auth = "Bearer"+userId;
             console.log(auth)
-            formData.append({'file': blob});
-            formData.append({'title':title})
-            formData.append({'description':type})
-            formData.append({'tags':"proba"})
+            formData.append('file': blob);
+            formData.append('title':title)
+            formData.append('description':type)
+            formData.append('tags':"proba")
         
             for (const key of formData.entries()) {
               console.log(key);

@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import PictureUpload from '../PictureUpload';
 import UploadIcon from '@mui/icons-material/Upload';
 
-export default function TemporaryDrawer({newPaint}) {
+export default function TemporaryDrawer({newPaint, userId}) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -29,7 +29,7 @@ export default function TemporaryDrawer({newPaint}) {
       /* onClick={toggleDrawer(anchor, false)} */
       /* onKeyDown={toggleDrawer(anchor, false)} */
     >
-      <PictureUpload></PictureUpload>
+      <PictureUpload userId={userId}></PictureUpload>
     </Box>
   );
 

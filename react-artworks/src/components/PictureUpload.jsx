@@ -1,22 +1,27 @@
 import { useState } from "react";
 import "./PictureUpload.css"
 
-const PictureUpload = () => {
+const PictureUpload = ({userId}) => {
 
-  const[newTitle,setNewTitle]= useState("")
-  const[newDesc,setNewDesc]= useState("")
-  const[newFile,setNewFile]= useState(null)
+  const [newTitle, setNewTitle] = useState("")
+  const [newDesc, setNewDesc] = useState("")
+  const [newFile, setNewFile] = useState(null)
 
-  const sendData = (e) =>{
-    e.preventDefault()
+  const uploadArtwork = async () => {
+    const formData = new FormData();
+    formData.append("title", newTitle);
+    formData.append("description", newDesc);
+    formData.append("file", newFile);
 
-    const data = new FormData()
-    data.append("title",newTitle)
-    data.append("description",newDesc)
-    data.append("file",newFile)
+    const respone = await fetch("http://18.194.143.121:80/api/artwork", {
+      method: 'POST',
+      headers: {
 
-    fetch('http://18.194.143.121:80/api/artwork', { method: 'POST', body: data })
-      .then(res => res.json())
+        "Authorization": 'Bearer ' + userId,
+        "Content-type": "multipart/form-data",
+      },
+      body: formData
+    })
   }
 
   return (
@@ -41,7 +46,7 @@ const PictureUpload = () => {
           onChange={e => setNewFile(e.target.files[0])}
         />
 
-        <button>Submit</button>
+        <button onClick={uploadArtwork}>Submit</button>
       </form>
       {newFile && <div className="uploadChoosenDiv">
         <h2>Choosen Photo:</h2>
