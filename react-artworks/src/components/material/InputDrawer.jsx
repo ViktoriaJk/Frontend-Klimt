@@ -13,7 +13,6 @@ export default function TemporaryDrawer({newPaint, userId}) {
     right: false,
   });
 
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;

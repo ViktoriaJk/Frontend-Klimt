@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "./PictureUpload.css"
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Stack from '@mui/material/Stack';
 
-const PictureUpload = ({userId}) => {
+const PictureUpload = ({ userId }) => {
 
   const [newTitle, setNewTitle] = useState("")
   const [newDesc, setNewDesc] = useState("")
@@ -9,15 +13,15 @@ const PictureUpload = ({userId}) => {
 
   const uploadArtwork = async (e) => {
     e.preventDefault();
-    const auth = 'Bearer '+userId;
+    const auth = 'Bearer ' + userId;
     const formData = new FormData();
     formData.append("title", newTitle);
     formData.append("description", newDesc);
-    formData.append("imgfile", newFile);
+    formData.append("file", newFile);
     console.log(auth);
 
     const response = await fetch("http://18.194.143.121:80/api/artwork", {
-      method:'POST',
+      method: 'POST',
       headers: {
 
         "Authorization": 'Bearer' + userId,
@@ -32,25 +36,53 @@ const PictureUpload = ({userId}) => {
     <div className="uploadContainerDiv">
       <h1>Please upload a new picture:</h1>
       <form className="uploadDivForm">
-        <input
-          type="text"
-          placeholder="Picture title"
-          value={newTitle}
-          onChange={e => setNewTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Picture description"
-          value={newDesc}
-          onChange={e => setNewDesc(e.target.value)}
-        />
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-basic"
+            label="Title"
+            variant="outlined"
+            type="text"
+            value={newTitle}
+            onChange={e => setNewTitle(e.target.value)}
+          />
+        </Box>
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-basic"
+            label="Description"
+            variant="outlined"
+            type="text"
+            value={newDesc}
+            oonChange={e => setNewDesc(e.target.value)}
+          />
+        </Box>
         <input
           type="file"
           placeholder="Picture description"
           onChange={e => setNewFile(e.target.files[0])}
         />
+        {/* <Stack direction="row" alignItems="center" spacing={2}>
+          <Button variant="contained" component="label" onClick={uploadArtwork} onChange={e => setNewFile(e.target.files[0])} endIcon={<PhotoCamera />}>
+            Upload
+            <input hidden accept="image/*" multiple type="file" />
+          </Button> 
+        </Stack>  */}
 
-        <button onClick={uploadArtwork}>Submit</button>
+        <button onClick={uploadArtwork}>Upload</button>
       </form>
       {newFile && <div className="uploadChoosenDiv">
         <h2>Choosen Photo:</h2>

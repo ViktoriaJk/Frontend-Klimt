@@ -8,24 +8,27 @@ import MenuIcon from '@mui/icons-material/Menu';
 import InputField from './InputField';
 import TagField from './TagField';
 import TemporaryDrawer from './InputDrawer';
+import "../Logo.css";
 
-export default function ButtonAppBar({page,setPage, userId, changeSignIn, trySigningUp, tryLoading, changeLoading, watchFavourite, dontWatchFavourite, getSearchPainters, getTags,newPaint, isLoggedIn, toLogOut, isLoading, toWatchFavourite}) {
+export default function ButtonAppBar({ page, setPage, userId, changeSignIn, trySigningUp, tryLoading, changeLoading, watchFavourite, dontWatchFavourite, getSearchPainters, getTags, newPaint, isLoggedIn, toLogOut, isLoading, toWatchFavourite }) {
 
   return (
     <Box sx={{ flexGrow: 1, }}>
       <AppBar position="fixed">
         <Toolbar>
-        {isLoggedIn && !isLoading && <TemporaryDrawer userId={userId} edge="start" newPaint={newPaint}></TemporaryDrawer>}
-        {isLoggedIn && !watchFavourite &&<Button onClick={ toWatchFavourite } color="inherit">FAVOURITES</Button>}
-        {isLoggedIn && watchFavourite && <Button onClick={ dontWatchFavourite } color="inherit">PAINTINGS</Button>}
-        {page==="login"  &&<Button onClick={ e=> setPage("")} color="inherit">HOME</Button>}
-        {page==="signIn" &&<Button onClick={ e=> setPage("")} color="inherit">HOME</Button>}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          </Typography>
-          {!isLoading && isLoggedIn &&<TagField getTags={getTags}></TagField>}
+          {isLoggedIn && !isLoading && <TemporaryDrawer userId={userId} edge="start" newPaint={newPaint}></TemporaryDrawer>}
+          {isLoggedIn && !watchFavourite && <Button onClick={toWatchFavourite} color="inherit">FAVOURITES</Button>}
+          {isLoggedIn && watchFavourite && <Button onClick={dontWatchFavourite} color="inherit">PAINTINGS</Button>}
+          {page === "login" && <Button onClick={e => setPage("")} color="inherit">HOME</Button>}
+          {page === "signIn" && <Button onClick={e => setPage("")} color="inherit">HOME</Button>}
+          <div className="units">
+            <div>Klimt Art Magazine</div>
+            <div>Klimt Art Magazine</div>
+          </div>
+          {!isLoading && isLoggedIn && <TagField getTags={getTags}></TagField>}
           {!isLoading && !tryLoading && !trySigningUp && <InputField getSearchPainters={getSearchPainters} />}
           {!tryLoading && !isLoggedIn && <Button color="inherit" onClick={e => setPage("login")}>LOG IN</Button>}
-          {isLoggedIn &&  <Button color="inherit" onClick={toLogOut} >LOG OUT</Button>}
+          {isLoggedIn && <Button color="inherit" onClick={toLogOut} >LOG OUT</Button>}
           {!isLoggedIn && <Button color="inherit" onClick={e => setPage("signIn")}>Sign Up</Button>}
         </Toolbar>
       </AppBar>
