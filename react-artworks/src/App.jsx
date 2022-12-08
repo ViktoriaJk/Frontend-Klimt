@@ -115,7 +115,6 @@ function App() {
     .filter(painting => {
       let contain =false
       for (const elem of painting.tags){
-        console.log(elem.term);
         if(elem.term.toLowerCase().includes(searchTag)){
           contain=(elem.term.toLowerCase().includes(searchTag))
         }
@@ -123,7 +122,6 @@ function App() {
       return contain
     })
     : []
-    console.log(page)
 
   return (
     <div className="App">
@@ -138,7 +136,7 @@ function App() {
         { page==="signIn" && <SignIn toSignIn={toSignIn} setPage={setPage}></SignIn>}
         <div className="picturesContainer">
           {isLoading && <LoadingAnimation/>}
-          {watchFavourite &&  <Favorites userId={userId} ></Favorites>}
+          {watchFavourite &&  <Favorites watchFavourite={watchFavourite} userId={userId} ></Favorites>}
           {!isLoading && paintings && page==="" && !watchFavourite &&  
             <>
               {filteredPainters.length ? filteredPainters

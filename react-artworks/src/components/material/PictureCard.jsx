@@ -43,7 +43,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
   
-  const PictureCard = ({userId,repo,wiki,tags, name, title, type, date, picture,firstLetter,isLoggedIn }) => {
+  const PictureCard = ({desc,userId,repo,wiki,tags, name, title, type, date, picture,firstLetter,isLoggedIn }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [open, setOpen] = useState(false);
@@ -161,6 +161,9 @@ const ExpandMore = styled((props) => {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
           {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {desc}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
