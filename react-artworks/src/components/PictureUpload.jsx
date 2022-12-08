@@ -35,7 +35,7 @@ const PictureUpload = ({ userId }) => {
   return (
     <div className="uploadContainerDiv">
       <h1>Please upload a new picture:</h1>
-      <form className="uploadDivForm">
+      <div className="uploadDivForm">
         <Box
           component="form"
           sx={{
@@ -67,7 +67,7 @@ const PictureUpload = ({ userId }) => {
             variant="outlined"
             type="text"
             value={newDesc}
-            oonChange={e => setNewDesc(e.target.value)}
+            onChange={e => setNewDesc(e.target.value)}
           />
         </Box>
         <input
@@ -83,7 +83,7 @@ const PictureUpload = ({ userId }) => {
         </Stack>  */}
 
         <button onClick={uploadArtwork}>Upload</button>
-      </form>
+      </div>
       {newFile && <div className="uploadChoosenDiv">
         <h2>Choosen Photo:</h2>
         <img src={URL.createObjectURL(newFile)} alt="" />
