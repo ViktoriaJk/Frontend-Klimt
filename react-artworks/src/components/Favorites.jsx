@@ -1,15 +1,14 @@
 import "./Favorites.css"
 import http from "axios"
 import { useState,useEffect } from "react"
-import PictureCard from "./material/PictureCard"
 
 
-const Favorites = ({userId,watchFavorite}) =>{
+const Favorites = ({userId}) =>{
 
     const [favoritePaintings,setFavoritePaintings] = useState([])
-    const [newImgUrl,setNewImgUrl] = useState([])
+    const [newImgUrl,setNewImgUrl] = useState(null)
     let favorites = null;
-    const img = [];
+    let img = [];
 
     const loadPaintings = async (userId) => { 
         const response = await http.get("http://18.194.143.121:80/api/artwork", {
@@ -20,38 +19,44 @@ const Favorites = ({userId,watchFavorite}) =>{
           setFavoritePaintings(favorites)
       }
 
-      console.log(favoritePaintings)
- 
+      console.log(favoritePaintings,"egesz kep")
+      
     const loadpicture = async (x) => {
-            for(const picture of favoritePaintings){
-              const response = await http.get("http://"+picture.url, {
-                headers: { 
-                  "Authorization": 'Bearer '+x }
-              })
-              img.push(response)
-              console.log(response)
-              console.log(img)
-            }                 
+      if(favoritePaintings.length !==0){
+        for(const picture of favoritePaintings){
+          const response = await http.get("http://"+picture.url, {
+            headers: { 
+              "Authorization": 'Bearer '+x }
+          })
+          img.push(response)
+        }                 
+      }
+            console.log(img,"ulr")
             setNewImgUrl(img)
       }
 
-
+      const init = async() =>{
+       const data1= await loadPaintings(userId)
+      }
 
     useEffect(()=>{
-      loadPaintings(userId)
-      loadpicture(userId)
+     init()
     },[])
+    useEffect(()=>{
+      loadpicture(userId)
+     },[favoritePaintings])
  
 
     
     return(
         <div className="favoritesContainerDiv">
-            {favoritePaintings.length ? favoritePaintings.map((painting,index) => (
+            {favoritePaintings.length && newImgUrl.length ? favoritePaintings.map((painting,index) => (
                       <div>
+                        <img src={"data:image/jpg;base64,"+newImgUrl[index].data} alt="vmi" />
                         <h1>{painting.title}</h1>
                         <p>{painting.description}</p>
                       </div>
-                )) :<h1>Sorry, you don't have any favourite paintings yet!</h1>}
+                )) :<h1>Sorry, you don't have any favourite paintings yet!...</h1>}
         </div>
     )
 }

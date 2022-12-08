@@ -10,6 +10,7 @@ const PictureUpload = ({ userId }) => {
   const [newTitle, setNewTitle] = useState("")
   const [newDesc, setNewDesc] = useState("")
   const [newFile, setNewFile] = useState(null)
+  const [success,setSuccess]=useState(false)
 
   const uploadArtwork = async (e) => {
     e.preventDefault();
@@ -18,18 +19,19 @@ const PictureUpload = ({ userId }) => {
     formData.append("title", newTitle);
     formData.append("description", newDesc);
     formData.append("file", newFile);
+    formData.append("tags","tags,tags")
     console.log(auth);
 
     const response = await fetch("http://18.194.143.121:80/api/artwork", {
       method: 'POST',
       headers: {
-
-        "Authorization": 'Bearer' + userId,
-        "Content-type": "multipart/form-data",
+        "Authorization": auth,
       },
       body: formData
     })
-    console.log(response);
+      if(response.status ===200){
+        setSuccess(true)
+      }
   }
 
   return (
@@ -84,7 +86,8 @@ const PictureUpload = ({ userId }) => {
 
         <button onClick={uploadArtwork}>Upload</button>
       </div>
-      {newFile && <div className="uploadChoosenDiv">
+      {success && <h1>Sikeres feltöltés</h1>}
+      {newFile && !success && <div className="uploadChoosenDiv">
         <h2>Choosen Photo:</h2>
         <img src={URL.createObjectURL(newFile)} alt="" />
         <h3>Title:{newTitle}</h3>
