@@ -16,15 +16,15 @@ export default function ButtonAppBar({ page, setPage, userId, changeSignIn, tryS
     <Box sx={{ flexGrow: 1, }}>
       <AppBar position="fixed">
         <Toolbar>
+          <div className="units">
+              <div>Klimt Art Magazine</div>
+              <div>Klimt Art Magazine</div>
+          </div>
           {isLoggedIn && !isLoading && <TemporaryDrawer userId={userId} edge="start" newPaint={newPaint}></TemporaryDrawer>}
           {isLoggedIn && !watchFavourite && <Button onClick={toWatchFavourite} color="inherit">FAVOURITES</Button>}
           {isLoggedIn && watchFavourite && <Button onClick={dontWatchFavourite} color="inherit">PAINTINGS</Button>}
-          {page === "login" && <Button onClick={e => setPage("")} color="inherit">HOME</Button>}
-          {page === "signIn" && <Button onClick={e => setPage("")} color="inherit">HOME</Button>}
-          <div className="units">
-            <div>Klimt Art Magazine</div>
-            <div>Klimt Art Magazine</div>
-          </div>
+          {/* {page === "login" && <Button onClick={e => setPage("")} color="inherit">HOME</Button>}
+          {page === "signIn" && <Button onClick={e => setPage("")} color="inherit">HOME</Button>} */}
           {!isLoading && isLoggedIn && <TagField getTags={getTags}></TagField>}
           {!isLoading && !tryLoading && !trySigningUp && <InputField getSearchPainters={getSearchPainters} />}
           {!tryLoading && !isLoggedIn && <Button color="inherit" onClick={e => setPage("login")}>LOG IN</Button>}

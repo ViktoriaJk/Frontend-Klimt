@@ -1,10 +1,11 @@
 .modalContainerDiv{
     display: flex;
-    justify-content: row;
+    flex-direction: row;
     gap: 2rem;
     position: relative;
+    border-radius: 5px;
 }
-.modalleftDiv img{
+.modalleftDiv img {
     width: 32rem;
 }
 .modalrightDiv{
@@ -12,7 +13,7 @@
     flex-direction: column;
     justify-content: center;
 }
-.modalrightDiv h2{
+.modalrightDiv h2 {
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
 }
@@ -21,4 +22,24 @@
     top:0;
     right: 0;
     cursor: pointer;
+}
+
+.modalBox {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 900px;
+    background-color: #fff;
+    border: 5px solid #c75747;
+    border-radius: 5px;
+    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+    padding-top: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 24px;
 }

@@ -32,17 +32,6 @@ const style = {
   pb: 3,
 };
 
-const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
-  
   const PictureCard = ({desc,userId,repo,wiki,tags, name, title, type, date, picture,firstLetter,isLoggedIn }) => {
 
     const [expanded, setExpanded] = useState(false);
@@ -170,25 +159,14 @@ const ExpandMore = styled((props) => {
            <IconButton aria-label="add to favorites">
            {isLoggedIn ? <FavoriteIcon  sx={{ color: red[500]}}/> : <HeartBrokenIcon ></HeartBrokenIcon>}
           </IconButton>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          
-        </Collapse>
         <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{ width: 900 }} className="modalBox">
           <PaintModal handleClose={handleClose} wiki={wiki} repo={repo} tags={tags} name={name} title={title} type={type} date={date} picture={picture}></PaintModal>
         </Box>
       </Modal>

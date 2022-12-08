@@ -1,6 +1,5 @@
 .units {
     position: relative;
-    text-align: center;
     width: 100%;
     flex-grow: 1;
 	width: max-content;
@@ -9,16 +8,14 @@
 	-webkit-user-select: none;
 	pointer-events: none;
 	padding: 0 10px;
+    white-space: nowrap;
 }
 
 .units > * {
 	font-family: "EB Garamond";
     font-size: 32px;
     font-weight: bold;
-	background-image: url("../assets/logo_background7.jpg");
-    background-size: 100% 100%;
-	-webkit-background-clip: text;
-	color: transparent;
+    color: #ddd;
 	overflow: hidden;
 }
 
@@ -27,9 +24,6 @@
     margin-left: auto;
     margin-right: auto;
     top: 32px;
-    left: 0;
-    right: 0;
-    text-align: center;
 	transform: rotatex(180deg) translatey(15px);
     --gradient: linear-gradient(transparent 50%, white 90%);
 	-webkit-mask-image: var(--gradient);

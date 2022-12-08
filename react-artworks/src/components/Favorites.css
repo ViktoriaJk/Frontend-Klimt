@@ -1,6 +1,7 @@
 .favoritesContainerDiv{
     display: flex;
-    height: 30vh;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    gap: 20px;
+    align-items: flex-start;
 }
